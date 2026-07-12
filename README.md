@@ -1,2 +1,3 @@
 # rock-paper-scissors-js-test
-dont judge me
+Rock, Paper, Scissors game to be played in the browser console.
+Made using basic JavaScript.
