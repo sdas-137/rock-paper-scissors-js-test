@@ -29,25 +29,47 @@ function getHumanChoice() {
     return input;
 }
 
-// Score counts
-let computerScore = 0;
-let humanScore = 0;
+// Function to play game
+function playGame() {
+    // Score counts
+    let computerScore = 0;
+    let humanScore = 0;
 
-// Function to compare computer and user choices and update score accordingly
-function playRound(computerChoice, humanChoice) {
-    console.log("You chose: '" + humanChoice + "'. Computer chose: '" + computerChoice + "'.");
-    if (computerChoice === humanChoice) console.log("Tie!");
-    else if (computerChoice === "rock" && humanChoice === "scissors" || computerChoice === "paper" && humanChoice === "rock" || computerChoice === "scissors" && humanChoice === "paper") {
-        computerScore++;
-        console.log("You lose!");
+    // Function to compare computer and user choices and update score accordingly
+    function playRound(computerChoice, humanChoice) {
+        console.log("You chose: '" + humanChoice + "'. Computer chose: '" + computerChoice + "'.");
+        if (computerChoice === humanChoice) console.log("Tie!");
+        else if (computerChoice === "rock" && humanChoice === "scissors" || computerChoice === "paper" && humanChoice === "rock" || computerChoice === "scissors" && humanChoice === "paper") {
+            computerScore++;
+            console.log("You lose this round!");
+        }
+        else {
+            humanScore++;
+            console.log("You win this round!");
+        }
     }
-    else {
-        humanScore++;
-        console.log("You win!");
+
+    // Game plays for 5 rounds
+    console.log("Rock, Paper, Scissors! \nPlay against a computer for 5 rounds!");
+    for (let i = 0; i < 5; i++){
+
+        console.log("\nRound " + (i + 1));
+
+        const computerSelection = getComputerChoice();
+        const humanSelection = getHumanChoice();
+        playRound(computerSelection, humanSelection);
+
+        console.log("Your score: " + humanScore + ". Computer score: " + computerScore + ".");
     }
+
+    console.log("\nFinal scores: \nYour score: " + humanScore + ". Computer score: " + computerScore + ".");
+
+    if (computerScore > humanScore) console.log("You lose! Better luck next time!");
+    else if (computerScore < humanScore) console.log("You win! Congratulations!");
+    else console.log("It's a tie!");
+
+    console.log("\nRefresh this page to play again");
+
 }
 
-const computerSelection = getComputerChoice();
-const humanSelection = getHumanChoice();
-
-playRound(computerSelection, humanSelection);
+playGame();
