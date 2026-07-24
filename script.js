@@ -63,7 +63,7 @@ function playGame() {
             // Plays up to 5 rounds
             const roundNumber = document.querySelector(".round");
             if (roundCount < NUM_ROUNDS) {
-                roundNumber.textContent = "Round: " + (roundCount + 1);
+                roundNumber.textContent = "Round " + (roundCount + 1);
 
                 const computerSelection = getComputerChoice();
                 const humanSelection = getHumanChoice(event);

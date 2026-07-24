@@ -1,0 +1,36 @@
+body {
+    background-color: black;
+    color: azure;
+    font-family: Arial, sans-serif;
+}
+
+button {
+    background-color: blanchedalmond;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: burlywood; 
+}
+
+.paper {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.round {
+    margin-bottom: 6px;
+}
+
+.scores {
+    margin-top: 4px;
+}
+
+.replay {
+    margin-top: 10px;
+}
+
+#footer {
+    font-family: 'Courier New', Courier, monospace;
+}
