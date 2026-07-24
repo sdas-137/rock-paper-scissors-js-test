@@ -4,6 +4,10 @@ body {
     font-family: Arial, sans-serif;
 }
 
+h2 {
+    color: rgb(216, 216, 216);
+}
+
 button {
     background-color: burlywood;
     border-radius: 4px;
@@ -22,10 +26,16 @@ button:hover {
 
 .round {
     margin-bottom: 6px;
+    color: rgb(206, 206, 206);
 }
 
 .scores {
     margin-top: 4px;
+    color: rgb(196, 196, 196);
+}
+
+.result {
+    color: rgb(206, 206, 206);
 }
 
 .replay {
