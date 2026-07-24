@@ -1,18 +1,18 @@
 body {
-    background-color: black;
-    color: azure;
+    background-color: rgb(18, 18, 18);
+    color: rgb(176, 176, 176);
     font-family: Arial, sans-serif;
 }
 
 button {
-    background-color: blanchedalmond;
+    background-color: burlywood;
     border-radius: 4px;
     transition: 0.1s;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: burlywood; 
+    background-color: coral; 
 }
 
 .paper {
