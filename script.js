@@ -20,17 +20,19 @@ function getComputerChoice() {
 // This function gets and returns the user's choice
 function getHumanChoice() {
 
-    let input = prompt("Enter your input: \nNote: valid inputs are only 'rock', 'paper' and 'scissors' (quotation marks excluded, case insensitive)", "");
+    const inputButtons = document.querySelector(".buttons");
 
-    // Handle input validitiy
-    if (!input) input = "";
-    input = input.toLowerCase();
-    if (input != "rock" && input != "paper" && input != "scissors") {
-        input = getComputerChoice();
-        console.log("Invalid input! The computer has picked a random choice for you.");
-    }
+    const rockButton = document.querySelector("#rock");
+    const paperButton = document.querySelector("#paper");
+    const scissorsButton = document.querySelector("#scissors");
+
+    let input;
+    inputButtons.addEventListener("click", (event) => {
+        input = event.target.id;
+    });
 
     return input;
+
 }
 
 // Function to play game
@@ -43,17 +45,24 @@ function playGame() {
     // Function to compare computer and user choices and update score accordingly
     function playRound(computerChoice, humanChoice) {
 
-        console.log("You chose: '" + humanChoice + "'. Computer chose: '" + computerChoice + "'.");
+        const humanChoiceDisplay = document.querySelector(".human-choice");
+        const computerChoiceDisplay = document.querySelector(".computer-choice");
+        const gameLog = document.querySelector(".gamelog");
+
+        humanChoiceDisplay.textContent = "You chose " + humanChoice + "!";
+        computerChoiceDisplay.textContent = "Computer chose " + computerChoice + "!";
 
         // Game logic
-        if (computerChoice === humanChoice) console.log("Tie!");
+        if (computerChoice === humanChoice) {
+            gameLog.textContent = "Tie!";
+        }
         else if (computerChoice === "rock" && humanChoice === "scissors" || computerChoice === "paper" && humanChoice === "rock" || computerChoice === "scissors" && humanChoice === "paper") {
             computerScore++;
-            console.log("You lose this round!");
+            gameLog.textContent = "You lose this round!";
         }
         else {
             humanScore++;
-            console.log("You win this round!");
+            gameLog.textContent = "You win this round!";
         }
 
     }
