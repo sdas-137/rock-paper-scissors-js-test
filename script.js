@@ -17,21 +17,13 @@ function getComputerChoice() {
 
 }
 
-// This function gets and returns the user's choice
-function getHumanChoice() {
+// Get references to input buttons
+const inputButtons = document.querySelector(".buttons");
 
-    const inputButtons = document.querySelector(".buttons");
+// This function returns the user's choice
+function getHumanChoice(event) {
 
-    const rockButton = document.querySelector("#rock");
-    const paperButton = document.querySelector("#paper");
-    const scissorsButton = document.querySelector("#scissors");
-
-    let input;
-    inputButtons.addEventListener("click", (event) => {
-        input = event.target.id;
-    });
-
-    return input;
+    return event.target.id;
 
 }
 
@@ -66,21 +58,16 @@ function playGame() {
         }
 
     }
-
-    console.log("Rock, Paper, Scissors! \nPlay against a computer for 5 rounds!");
     
     // Game plays for 5 rounds
-    for (let i = 0; i < 5; i++){
+    const NUM_ROUNDS = 5;
+    let roundCount = 0;
 
-        console.log("\nRound " + (i + 1));
-
+    inputButtons.addEventListener("click", (event) => {
         const computerSelection = getComputerChoice();
-        const humanSelection = getHumanChoice();
+        const humanSelection = getHumanChoice(event);
         playRound(computerSelection, humanSelection);
-
-        console.log("Your score: " + humanScore + ". Computer score: " + computerScore + ".");
-
-    }
+    });
 
     console.log("\nFinal scores: \nYour score: " + humanScore + ". Computer score: " + computerScore + ".");
 
