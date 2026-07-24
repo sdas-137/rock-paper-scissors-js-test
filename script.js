@@ -17,13 +17,10 @@ function getComputerChoice() {
 
 }
 
-// Get references to input buttons
-const inputButtons = document.querySelector(".buttons");
-
 // This function returns the user's choice
 function getHumanChoice(event) {
 
-    return event.target.id;
+    return event.target.classList;
 
 }
 
@@ -63,10 +60,19 @@ function playGame() {
     const NUM_ROUNDS = 5;
     let roundCount = 0;
 
-    inputButtons.addEventListener("click", (event) => {
-        const computerSelection = getComputerChoice();
-        const humanSelection = getHumanChoice(event);
-        playRound(computerSelection, humanSelection);
+    // Get references to input buttons
+    const inputButtons = document.querySelectorAll(".choose");
+
+    // Plays a round only when the user clicks a button
+    inputButtons.forEach((button) => {
+        button.addEventListener("click", (event) => {
+            const computerSelection = getComputerChoice();
+            const humanSelection = getHumanChoice(event);
+            if (roundCount != NUM_ROUNDS) {
+                playRound(computerSelection, humanSelection);
+                roundCount++;
+            }
+        })
     });
 
     console.log("\nFinal scores: \nYour score: " + humanScore + ". Computer score: " + computerScore + ".");
