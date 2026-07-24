@@ -27,14 +27,14 @@ function playGame() {
     let computerScore = 0;
     let humanScore = 0;
 
+    const humanChoiceDisplay = document.querySelector(".human-choice");
+    const computerChoiceDisplay = document.querySelector(".computer-choice");
+    const gameLog = document.querySelector(".gamelog");
+
     // Compare computer and user choices and update score accordingly
     function playRound(computerChoice, humanChoice) {
 
         // Update choices displays
-        const humanChoiceDisplay = document.querySelector(".human-choice");
-        const computerChoiceDisplay = document.querySelector(".computer-choice");
-        const gameLog = document.querySelector(".gamelog");
-
         humanChoiceDisplay.textContent = "You chose " + humanChoice + "!";
         computerChoiceDisplay.textContent = "Computer chose " + computerChoice + "!";
 
@@ -61,10 +61,15 @@ function playGame() {
         button.addEventListener("click", (event) => {
 
             // Plays up to 5 rounds
+            const roundNumber = document.querySelector(".round");
             if (roundCount < NUM_ROUNDS) {
+                roundNumber.textContent = "Round: " + (roundCount + 1);
+
                 const computerSelection = getComputerChoice();
                 const humanSelection = getHumanChoice(event);
+
                 playRound(computerSelection, humanSelection);
+
                 roundCount++;
             }
             const scoresDisplay = document.querySelector(".scores");
@@ -77,10 +82,18 @@ function playGame() {
                 else if (computerScore < humanScore) finalResult.textContent = "You win! Congratulations!";
                 else finalResult.textContent = "It's a tie!";
 
-                const refreshMessage = document.createElement("div");
-                refreshMessage.classList.add("display", "refresh");
-                refreshMessage.textContent = "Refresh this page to play again";
-                const game = document.querySelector(".game"); game.appendChild(refreshMessage);
+                // Replay game button
+                const replayButton = document.createElement("button");
+                replayButton.classList.add("replay");
+                replayButton.textContent = "Play Again";
+                const game = document.querySelector(".game"); game.appendChild(replayButton);
+
+                replayButton.addEventListener("click", () => {
+                    computerScore = humanScore = roundCount = 0;
+                    roundNumber.textContent = humanChoiceDisplay.textContent = computerChoiceDisplay.textContent = gameLog.textContent = scoresDisplay.textContent = finalResult.textContent = "";
+                    game.removeChild(replayButton);
+                });
+
                 roundCount++;
             }
         })
