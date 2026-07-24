@@ -1,7 +1,6 @@
 // ROCK PAPER SCISSORS
 // By sdas_137
 
-// This function returns the computer's choice
 function getComputerChoice() {
 
     let choice  = Math.floor(Math.random()*3);
@@ -17,23 +16,21 @@ function getComputerChoice() {
 
 }
 
-// This function returns the user's choice
 function getHumanChoice(event) {
 
-    return event.target.classList;
+    return event.target.classList[1];
 
 }
 
-// Function to play game
 function playGame() {
 
-    // Score counts
     let computerScore = 0;
     let humanScore = 0;
 
-    // Function to compare computer and user choices and update score accordingly
+    // Compare computer and user choices and update score accordingly
     function playRound(computerChoice, humanChoice) {
 
+        // Update choices displays
         const humanChoiceDisplay = document.querySelector(".human-choice");
         const computerChoiceDisplay = document.querySelector(".computer-choice");
         const gameLog = document.querySelector(".gamelog");
@@ -55,35 +52,39 @@ function playGame() {
         }
 
     }
-    
-    // Game plays for 5 rounds
-    const NUM_ROUNDS = 5;
-    let roundCount = 0;
-
-    // Get references to input buttons
-    const inputButtons = document.querySelectorAll(".choose");
 
     // Plays a round only when the user clicks a button
+    const NUM_ROUNDS = 5;
+    let roundCount = 0;
+    const inputButtons = document.querySelectorAll(".choose");
     inputButtons.forEach((button) => {
         button.addEventListener("click", (event) => {
-            const computerSelection = getComputerChoice();
-            const humanSelection = getHumanChoice(event);
-            if (roundCount != NUM_ROUNDS) {
+
+            // Plays up to 5 rounds
+            if (roundCount < NUM_ROUNDS) {
+                const computerSelection = getComputerChoice();
+                const humanSelection = getHumanChoice(event);
                 playRound(computerSelection, humanSelection);
+                roundCount++;
+            }
+            const scoresDisplay = document.querySelector(".scores");
+            scoresDisplay.textContent = "Your score: " + humanScore + " Computer score: " + computerScore;
+
+            // Display final score
+            if (roundCount == NUM_ROUNDS) {
+                const finalResult = document.querySelector(".result");
+                if (computerScore > humanScore) finalResult.textContent = "You lose! Better luck next time!";
+                else if (computerScore < humanScore) finalResult.textContent = "You win! Congratulations!";
+                else finalResult.textContent = "It's a tie!";
+
+                const refreshMessage = document.createElement("div");
+                refreshMessage.classList.add("display", "refresh");
+                refreshMessage.textContent = "Refresh this page to play again";
+                const game = document.querySelector(".game"); game.appendChild(refreshMessage);
                 roundCount++;
             }
         })
     });
-
-    console.log("\nFinal scores: \nYour score: " + humanScore + ". Computer score: " + computerScore + ".");
-
-    // Final scores and decide winner
-    if (computerScore > humanScore) console.log("You lose! Better luck next time!");
-    else if (computerScore < humanScore) console.log("You win! Congratulations!");
-    else console.log("It's a tie!");
-
-    console.log("\nRefresh this page to play again");
-
 }
 
 playGame();
